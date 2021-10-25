@@ -38,6 +38,16 @@ FLUSH PRIVILEGES;
 exit;"
 sudo mysql -u root
 
+echo "Mongodb"
+if [ "$OS_TYPE" = "armv7l" ]; then
+    echo "Will not install Mongodb on Pi 4"
+else
+    wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+    sudo apt update && sudo apt -y upgrade
+    sudo apt-get install -y mongodb-org
+fi
+
 echo "Install PHP"
 if [ "$OS_TYPE" = "armv7l" ]; then
     sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
@@ -51,6 +61,11 @@ sudo apt update && sudo apt upgrade
 sudo apt install -y php-dev
 sudo apt -y install php-imagick php-gd php-cli php-mbstring php-pecl-http php-uploadprogress imagemagick \
 php8.0-apcu php8.0-cli php8.0-curl php8.0-dev php8.0-gd php8.0-http php8.0-igbinary php8.0-imagick php8.0-intl php8.0-mbstring php8.0-mcrypt php8.0-oauth php8.0-pcov php8.0-raphf php8.0-soap php8.0-xml php8.0-xmlrpc php8.0-xsl php8.0-yaml php8.0-zip
+
+if [ "$OS_TYPE" = "armv7l" ]; then
+    sudo pecl install redis
+    sudo pecl install pcov
+fi
 
 sudo apt -y install php8.0-opcache php8.0-memcache php8.0-memcached
 sudo apt -y install php8.0-mongodb php8.0-mysql php8.0-redis php8.0-sqlite3
@@ -87,3 +102,7 @@ else
 
 fi
 sudo usermod -aG docker $USER
+
+echo "Webmin"
+wget http://prdownloads.sourceforge.net/webadmin/webmin_1.981_all.deb
+sudo dpkg --install webmin_1.981_all.deb
