@@ -11,15 +11,15 @@ case $(uname -m) in
     armv7l) OS_TYPE="armv7l"
 esac
 
-echo $OS_TYPE;
+echo "\e[95m$OS_TYPE";
 
-echo Update
+echo "\e[32mUpdate"
 sudo apt update && sudo apt -y upgrade
 
-echo Software properties common
+echo "\e[32mSoftware properties common"
 sudo apt -y install software-properties-common
 
-echo Basic packages
+echo "\e[32mBasic packages"
 sudo apt -y install curl git unzip perl libnet-ssleay-perl openssl libauthen-pam-perl libpam-runtime libio-pty-perl apt-show-versions python curl openssh-server
 sudo apt-get install \
     ca-certificates \
@@ -27,10 +27,10 @@ sudo apt-get install \
     gnupg \
     lsb-release
 
-echo Mariadb
+echo "\e[32mMariadb"
 sudo apt -y install mariadb-server
 
-echo Install PHP
+echo "\e[32mInstall PHP"
 if [ "$OS_TYPE" = "armv7l" ]; then
     sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
@@ -47,21 +47,21 @@ php8.0-apcu php8.0-cli php8.0-curl php8.0-dev php8.0-gd php8.0-http php8.0-igbin
 sudo apt -y install php8.0-opcache php8.0-memcache php8.0-memcached
 sudo apt -y install php8.0-mongodb php8.0-mysql php8.0-redis php8.0-sqlite3
 
-echo Install Nginx
+echo "\e[32mInstall Nginx"
 sudo apt -y remove apache2
 sudo apt -y install nginx
 
-echo Install Caching
+echo "\e[32mInstall Caching"
 sudo apt -y install redis-server memcached
 
-echo Install Composer
+echo "\e[32mInstall Composer"
 curl -sS https://getcomposer.org/installer -o composer-setup.php
 sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
-echo Install Supervisor
+echo "\e[32mInstall Supervisor"
 sudo apt -y install supervisor
 
-echo Install Docker
+echo "\e[32mInstall Docker"
 
 if [ "$OS_TYPE" = "armv7l" ]; then
     curl -fsSL https://get.docker.com -o get-docker.sh
