@@ -11,26 +11,25 @@ case $(uname -m) in
     armv7l) OS_TYPE="armv7l"
 esac
 
-echo "\e[95m$OS_TYPE";
+echo "$OS_TYPE";
 
-echo "\e[32mUpdate"
+echo "Update"
 sudo apt update && sudo apt -y upgrade
 
-echo "\e[32mSoftware properties common"
+echo "Software properties common"
 sudo apt -y install software-properties-common
 
-echo "\e[32mBasic packages"
+echo "Basic packages"
 sudo apt -y install curl git unzip perl libnet-ssleay-perl openssl libauthen-pam-perl libpam-runtime libio-pty-perl apt-show-versions python curl openssh-server
-sudo apt-get install \
+sudo apt -y install \
     ca-certificates \
-    curl \
     gnupg \
     lsb-release
 
-echo "\e[32mMariadb"
+echo "Mariadb"
 sudo apt -y install mariadb-server
 
-echo "\e[32mInstall PHP"
+echo "Install PHP"
 if [ "$OS_TYPE" = "armv7l" ]; then
     sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
     echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
@@ -47,21 +46,21 @@ php8.0-apcu php8.0-cli php8.0-curl php8.0-dev php8.0-gd php8.0-http php8.0-igbin
 sudo apt -y install php8.0-opcache php8.0-memcache php8.0-memcached
 sudo apt -y install php8.0-mongodb php8.0-mysql php8.0-redis php8.0-sqlite3
 
-echo "\e[32mInstall Nginx"
+echo "Install Nginx"
 sudo apt -y remove apache2
 sudo apt -y install nginx
 
-echo "\e[32mInstall Caching"
+echo "Install Caching"
 sudo apt -y install redis-server memcached
 
-echo "\e[32mInstall Composer"
+echo "Install Composer"
 curl -sS https://getcomposer.org/installer -o composer-setup.php
 sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
-echo "\e[32mInstall Supervisor"
+echo "Install Supervisor"
 sudo apt -y install supervisor
 
-echo "\e[32mInstall Docker"
+echo "Install Docker"
 
 if [ "$OS_TYPE" = "armv7l" ]; then
     curl -fsSL https://get.docker.com -o get-docker.sh
