@@ -49,6 +49,7 @@ sudo apt -y install php8.0-mongodb php8.0-mysql php8.0-redis php8.0-sqlite3
 echo "Install Nginx"
 sudo apt -y remove apache2
 sudo apt -y install nginx
+sudo apt -y install php8.0-fpm
 
 echo "Install Caching"
 sudo apt -y install redis-server memcached
