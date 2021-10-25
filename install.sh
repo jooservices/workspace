@@ -28,6 +28,15 @@ sudo apt -y install \
 
 echo "Mariadb"
 sudo apt -y install mariadb-server
+sudo /etc/init.d/mysql restart
+echo "Setup MariaDb"
+sudo mysql_secure_installation
+echo "USE mysql;
+UPDATE user SET plugin='mysql_native_password' WHERE User='root';
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
+FLUSH PRIVILEGES;
+exit;"
+sudo mysql -u root
 
 echo "Install PHP"
 if [ "$OS_TYPE" = "armv7l" ]; then
