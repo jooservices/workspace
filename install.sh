@@ -32,11 +32,11 @@ sudo apt -y install mariadb-server
 
 echo Install PHP
 if [ "$OS_TYPE" = "armv7l" ]; then
-        sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-        echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+    sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+    echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
 else
-        echo Ubuntu
-        sudo add-apt-repository ppa:ondrej/php
+    echo Ubuntu
+    sudo add-apt-repository ppa:ondrej/php
 fi
 
 sudo apt update && sudo apt upgrade
@@ -61,20 +61,19 @@ echo Install Supervisor
 sudo apt -y install supervisor
 
 echo Install Docker
-# Ubuntu
-# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-
-# echo \
-#  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-#  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-# sudo apt-get install docker-ce docker-ce-cli containerd.io
 
 if [ "$OS_TYPE" = "armv7l" ]; then
-        curl -fsSL https://get.docker.com -o get-docker.sh
-        sudo sh get-docker.sh
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sudo sh get-docker.sh
 else
-        echo Ubuntu
+    echo Ubuntu
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+    echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+    sudo apt-get install docker-ce docker-ce-cli containerd.io
 
 fi
 sudo usermod -aG docker $USER
