@@ -20,12 +20,12 @@ sudo apt install build-essential gcc g++ make flex bison openssl libssl-dev perl
   gnupg2 ca-certificates lsb-release apache2-dev libxml2-dev libcurl4-openssl-dev liblmdb-dev libgeoip-dev pkgconf \
   libpcre++-dev libyajl-dev apt-utils htop nano bc libmaxminddb-dev -y
 
-funcPromptInstall "Mariadb" installMariadb
-funcPromptInstall "Mongodb" installMongodb
-funcPromptInstall "PHP" installPhp
-funcPromptInstall "Composer" installComposer
-funcPromptInstall "Nginx" installNginx
-funcPromptInstall "Nodejs" installNodejs
-funcPromptInstall "Supervisor" installSupervisor
-funcPromptInstall "Docker" installDocker
-funcPromptInstall "Webmin" installWebmin
+promptInstall "Mariadb" installMariadb
+promptInstall "Mongodb" installMongodb
+promptInstall "PHP" installPhp
+promptInstall "Composer" installComposer
+promptInstall "Nginx" installNginx
+promptInstall "Nodejs" installNodejs
+promptInstall "Supervisor" installSupervisor
+promptInstall "Docker" installDocker
+promptInstall "Webmin" installWebmin

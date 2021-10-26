@@ -28,11 +28,25 @@ email() {
     done
 }
 
-funcPromptInstall(){
-  read -p "Install ${GREEN}$1${NC}: " confirm
-  if [ $confirm = "y" ]
+promptInstall(){
+  while true; do
+      read -p "Install ${GREEN}$1${NC}: " yn
+      case $yn in
+          [Yy]* ) infoWith "Installing" $1; $2;;
+          [Nn]* ) exit;;
+          * ) echo "Please answer yes or no.";;
+      esac
+  done
+}
+
+isInstalled()
+{
+  IS_INSTALLED=false
+
+  if [ -x "$(command -v $1)" ]
   then
-    infoWith "Installing" $1
-    $2
+      IS_INSTALLED=true;
   fi
+
+  return $IS_INSTALLED
 }
