@@ -1,6 +1,19 @@
 source init/variables.sh
-source init/functions/prompt_yn.sh
+source init/functions.sh
 
-echo "Init on $CURRENT_DIR by user $USER"
-echo "OS type: $OS_TYPE"
-echo "Kernel version: $(uname -r)"
+if [[ "$(id -u)" != "0" ]]; then
+    printf "${RED}%s${NC}\n" "${ROOT_REQUIRED}"
+    printf "${RED}%s${NC}\n" "${EXITING}"
+    exit
+fi
+
+if [[ ${RAM_TOTAL} -lt ${LOW_RAM} ]]; then
+    printf "${RED}%s${NC}\n" "${MINIMUM_RAM_REQUIRED}"
+    printf "${RED}%s${NC}\n" "${EXITING}"
+    exit
+fi
+
+infoWith "Init on $PWD by user:" "$USER"
+infoWith "OS:" "$OS"
+infoWith "OS type:" "$OS_TYPE"
+infoWith "Kernel version:" "$(uname -r)"
