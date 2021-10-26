@@ -29,9 +29,9 @@ funcPromptInstall "Composer" oses/composer.sh
 funcPromptInstall "Supervisor" oses/supervisor.sh
 
 if [ $IS_ARMV7L ]; then
-  funcPromptInstall "Docker" oses/armv7l/supervisor.sh
+  funcPromptInstall "Docker" oses/armv7l/docker.sh
 else
-  funcPromptInstall "Docker" oses/x86_x64/supervisor.sh
+  funcPromptInstall "Docker" oses/x86_x64/docker.sh
 fi
 
 funcPromptInstall "Webmin" oses/webmin.sh
