@@ -10,3 +10,9 @@ sudo apt -y install \
   ca-certificates \
   gnupg \
   lsb-release
+
+if [ $IS_ARMV7L ]; then
+  source oses/armv7l/init.sh
+else
+  source oses/x86_x64/init.sh
+fi

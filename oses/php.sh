@@ -1,8 +1,7 @@
-if [ "$OS_TYPE" = "armv7l" ]; then
+if [ $IS_ARMV7L ]; then
   sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
   echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
 else
-  echo Ubuntu
   sudo add-apt-repository ppa:ondrej/php
 fi
 
@@ -13,13 +12,13 @@ sudo apt -y install php-imagick php-gd php-cli php-mbstring php-pecl-http php-up
 sudo apt -y install php8.0-opcache php8.0-memcache php8.0-memcached
 sudo apt -y install php8.0-mongodb php8.0-mysql php8.0-redis php8.0-sqlite3
 
-if [ "$OS_TYPE" = "armv7l" ]; then
+if [ $IS_ARMV7L ]; then
   read -p "Install PHP Redis extension : " confirm
   if [ $confirm = "y" ]; then
     sudo pecl install redis
   fi
 
-  read -p "Install PHP PCov extension : " confirm
+  read -p "Install PHP Pcov extension : " confirm
   if [ $confirm = "y" ]; then
     sudo pecl install pcov
   fi

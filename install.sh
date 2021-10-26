@@ -1,31 +1,39 @@
 #!/bin/bash
 
-source os_type.sh
+source init/init.sh
 
-source general/init.sh
+source oses/init.sh
 
-source functions/prompt_yn.sh
+funcPromptInstall "MariaDB" oses/mariadb.sh
 
-funcPromptInstall "MariaDB" general/mariadb.sh
-
-if [ "$OS_TYPE" = "armv7l" ]; then
-  echo "Will not install Mongodb on Pi 4"
+if [ $IS_ARMV7L ]; then
+  funcPromptInstall "Mongodb" armv7l/mongodb.sh
 else
-  funcPromptInstall "Mongodb" ubuntu/mongodb.sh
+  funcPromptInstall "Mongodb" x86_x64/mongodb.sh
 fi
 
-funcPromptInstall "PHP" general/php.sh
+funcPromptInstall "PHP" oses/php.sh
 
-funcPromptInstall "Nginx" general/nginx.sh
+funcPromptInstall "Caching" oses/caching.sh
 
-funcPromptInstall "Composer" general/composer.sh
+funcPromptInstall "Nginx" oses/nginx.sh
 
-funcPromptInstall "Supervisor" general/supervisor.sh
+if [ $IS_ARMV7L ]; then
+  echo "Can not install Nodejs"
+else
+  funcPromptInstall "Nodejs" x86_x64/mongodb.sh
+fi
 
-if [ "$OS_TYPE" = "armv7l" ]; then
+funcPromptInstall "Composer" oses/composer.sh
+
+funcPromptInstall "Supervisor" oses/supervisor.sh
+
+if [ $IS_ARMV7L ]; then
   funcPromptInstall "Docker" armv7l/supervisor.sh
 else
-  funcPromptInstall "Docker" ubuntu/supervisor.sh
+  funcPromptInstall "Docker" x86_x64/supervisor.sh
 fi
 
-funcPromptInstall "Webmin" general/webmin.sh
+funcPromptInstall "Webmin" oses/webmin.sh
+
+ssh-keygen -t ed25519 -C "jooservices@gmail.com"
