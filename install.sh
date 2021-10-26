@@ -7,9 +7,9 @@ source oses/init.sh
 funcPromptInstall "MariaDB" oses/mariadb.sh
 
 if [ $IS_ARMV7L ]; then
-  funcPromptInstall "Mongodb" armv7l/mongodb.sh
+  funcPromptInstall "Mongodb" oses/armv7l/mongodb.sh
 else
-  funcPromptInstall "Mongodb" x86_x64/mongodb.sh
+  funcPromptInstall "Mongodb" oses/x86_x64/mongodb.sh
 fi
 
 funcPromptInstall "PHP" oses/php.sh
@@ -21,7 +21,7 @@ funcPromptInstall "Nginx" oses/nginx.sh
 if [ $IS_ARMV7L ]; then
   echo "Can not install Nodejs"
 else
-  funcPromptInstall "Nodejs" x86_x64/mongodb.sh
+  funcPromptInstall "Nodejs" oses/x86_x64/mongodb.sh
 fi
 
 funcPromptInstall "Composer" oses/composer.sh
@@ -29,9 +29,9 @@ funcPromptInstall "Composer" oses/composer.sh
 funcPromptInstall "Supervisor" oses/supervisor.sh
 
 if [ $IS_ARMV7L ]; then
-  funcPromptInstall "Docker" armv7l/supervisor.sh
+  funcPromptInstall "Docker" oses/armv7l/supervisor.sh
 else
-  funcPromptInstall "Docker" x86_x64/supervisor.sh
+  funcPromptInstall "Docker" oses/x86_x64/supervisor.sh
 fi
 
 funcPromptInstall "Webmin" oses/webmin.sh
