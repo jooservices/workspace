@@ -35,3 +35,4 @@ promptInstall "Nodejs" installNodejs
 promptInstall "Supervisor" installSupervisor
 promptInstall "Docker" installDocker
 promptInstall "Webmin" installWebmin
+promptInstall "Pihole" installPihole
