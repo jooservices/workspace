@@ -32,7 +32,7 @@ promptInstall(){
   while true; do
       read -p "Install ${GREEN}$1${NC}: " yn
       case $yn in
-          [Yy]* ) infoWith "Installing" $1; $2;;
+          [Yy]* ) infoWith "Installing" $1 $2;;
           [Nn]* ) exit;;
           * ) echo "Please answer yes or no.";;
       esac
