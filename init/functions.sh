@@ -26,7 +26,7 @@ email() {
 }
 
 promptInstall() {
-  read -p "Install $1: [Y\n]" -n 1 -r
+  read -p "Install $1 [Y\n]: " -n 1 -r
   echo # (optional) move to a new line
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     $2
