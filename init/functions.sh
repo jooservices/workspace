@@ -1,16 +1,16 @@
 alert()
 {
-  printf "${RED}%s${NC}\n" $1
+  printf "${RED}$1${NC}\n"
 }
 
 info()
 {
-  printf "${GREEN}%s${NC}\n" $1
+  printf "${GREEN}$1${NC}\n"
 }
 
 infoWith()
 {
-  printf "${NC}%s ${GREEN}%s${NC}\n" $1 $2
+  echo "${NC}$1: ${GREEN}$2${NC}\n"
 }
 
 email() {

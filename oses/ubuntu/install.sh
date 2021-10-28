@@ -20,6 +20,12 @@ sudo apt install build-essential gcc g++ make flex bison openssl libssl-dev perl
   gnupg2 ca-certificates lsb-release apache2-dev libxml2-dev libcurl4-openssl-dev liblmdb-dev libgeoip-dev pkgconf \
   libpcre++-dev libyajl-dev apt-utils htop nano bc libmaxminddb-dev -y
 
+if [[ ${RAM_TOTAL} -lt ${LOW_RAM} ]]; then
+    printf "${RED}%s${NC}\n" "${MINIMUM_RAM_REQUIRED}"
+    printf "${RED}%s${NC}\n" "${EXITING}"
+    exit
+fi
+
 promptInstall "Mariadb" installMariadb
 promptInstall "Mongodb" installMongodb
 promptInstall "PHP" installPhp

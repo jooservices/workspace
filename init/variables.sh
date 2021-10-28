@@ -27,7 +27,13 @@ NC='\033[0m'
 
 # System
 RAM_TOTAL=$(awk '/MemTotal/ {print $2}' /proc/meminfo)
-LOW_RAM='4194304'
+
+if [ "$OS" = "raspbian" ]; then
+  LOW_RAM='2097152'
+else
+  LOW_RAM='4194304'
+fi
+
 CPU_CORES=$(grep -c "processor" /proc/cpuinfo)
 MAX_CLIENT=$((CPU_CORES * 1024))
 

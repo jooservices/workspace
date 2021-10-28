@@ -19,3 +19,19 @@ sudo apt install build-essential gcc g++ make flex bison openssl libssl-dev perl
   libjpeg-dev libpng-dev libtiff-dev libgif-dev libwebp-dev imagemagick libpcre3 libpcre3-dev uuid-dev \
   gnupg2 ca-certificates lsb-release apache2-dev libxml2-dev libcurl4-openssl-dev liblmdb-dev libgeoip-dev pkgconf \
   libpcre++-dev libyajl-dev apt-utils htop nano bc libmaxminddb-dev -y
+
+if [[ ${RAM_TOTAL} -lt ${LOW_RAM} ]]; then
+    printf "${RED}%s${NC}\n" "${MINIMUM_RAM_REQUIRED}"
+    printf "${RED}%s${NC}\n" "${EXITING}"
+    exit
+fi
+
+promptInstall "Mariadb" installMariadb
+promptInstall "Mongodb" installMongodb
+promptInstall "PHP" installPhp
+promptInstall "Composer" installComposer
+promptInstall "Nginx" installNginx
+promptInstall "Nodejs" installNodejs
+promptInstall "Supervisor" installSupervisor
+promptInstall "Docker" installDocker
+promptInstall "Webmin" installWebmin
