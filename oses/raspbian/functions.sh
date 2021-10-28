@@ -31,12 +31,12 @@ installPhp() {
   sudo apt -y install php8.0-mongodb php8.0-mysql php8.0-redis php8.0-sqlite3
   sudo apt -y install php8.0-soap php8.0-oauth
 
-  read -p "Install PHP Redis extension : " confirm
+  read -p "Install PHP Redis extension: " confirm
   if [ $confirm = "y" ]; then
     sudo pecl install redis
   fi
 
-  read -p "Install PHP Pcov extension : " confirm
+  read -p "Install PHP Pcov extension: " confirm
   if [ $confirm = "y" ]; then
     sudo pecl install pcov
   fi
