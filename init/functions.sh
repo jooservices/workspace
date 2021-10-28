@@ -10,7 +10,7 @@ info()
 
 infoWith()
 {
-  echo "${NC}$1: ${GREEN}$2${NC}\n"
+  printf "${NC}$1: ${GREEN}$2${NC}\n"
 }
 
 email() {
