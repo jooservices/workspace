@@ -1,7 +1,7 @@
 installMariadb()
 {
   sudo apt -y install mariadb-server
-  sudo /etc/init.d/mysql restart
+  sudo /etc/init.d/mariadb restart
   echo "Setup MariaDb"
   sudo mysql_secure_installation
   echo "Use below script for switching to mysql_native_password"
